@@ -71,14 +71,14 @@ zfs mount main/ROOT/default
 zfs mount -a
 
 # preparing boot partition
-mkfs.ext4 /dev/disk/by-id/$DISK-part5
+mkfs.ext4 $DISK-part5
 mkdir -p /mnt/boot
-mount /dev/disk/by-id/$DISK-part5 /mnt/boot
+mount $DISK-part5 /mnt/boot
 
 # preparing EFI partition
-mkdosfs -F 32 -s 1 -n EFI /dev/disk/by-id/$DISK-part2
+mkdosfs -F 32 -s 1 -n EFI $DISK-part2
 mkdir -p /mnt/efi
-mount /dev/disk/by-id/$DISK-part2 /mnt/efi
+mount $DISK-part2 /mnt/efi
 
 cp -av /.azt /mnt
 
