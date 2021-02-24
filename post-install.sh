@@ -50,7 +50,6 @@ systemctl enable zfs-mount
 systemctl enable zfs.target
 
 systemctl enable NetworkManager
-systemctl enable systemd-resolved
 
 passwd
 
