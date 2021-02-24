@@ -41,8 +41,12 @@ grub-install \
   --bootloader-id=default \
   --recheck
 
-mkswap /dev/sda4
-swapon /dev/sda4
+mkswap /dev/sda5
+
+cat >> /etc/fstab <<EOF
+# uncomment line below to enable swap
+# UUID=`ls -l /dev/disk/by-uuid | grep /sda5 | cut -d' ' -f8` none swap defaults,discard 0 0
+EOF
 
 systemctl enable zfs-import-cache
 systemctl enable zfs-import.target
