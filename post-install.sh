@@ -12,8 +12,8 @@ EOF
 pacman -Sy
 
 ! pacman -S --noconfirm \
-  linux \
-  linux-headers \
+  linux-lts \
+  linux-lts-headers \
   zfs-dkms
 
 echo "`sed '/\[azt\]/,$d' < /etc/pacman.conf`" > /etc/pacman.conf
