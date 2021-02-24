@@ -8,12 +8,13 @@ pacstrap /mnt \
   base \
   grub \
   efibootmgr \
-  iwd \
+  linux-firmware \
   networkmanager \
-  broadcom-wl \
+  git \
   openssh \
   vim \
   bash-completion \
+  sudo \
   which \
 ;
 
