@@ -11,9 +11,10 @@ EOF
 
 pacman -Sy
 
+# do not edit linux package, instead consider to update it after install
 ! pacman -S --noconfirm \
-  linux-lts \
-  linux-lts-headers \
+  linux \
+  linux-headers \
   zfs-dkms
 
 echo "`sed '/\[azt\]/,$d' < /etc/pacman.conf`" > /etc/pacman.conf
