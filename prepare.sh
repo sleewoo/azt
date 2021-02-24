@@ -16,12 +16,13 @@ fi
 mount -o remount,size=50% /run/archiso/cowspace
 modprobe zfs
 
-# sgdisk --zap-all $DISK
-# sgdisk -n2:1M:+512M  -t2:EF00 $DISK
-# sgdisk -n3:0:+2G     -t3:8300 $DISK
-# sgdisk -n4:0:+8G     -t4:8200 $DISK
-# sgdisk -n5:0:0       -t5:BF00 $DISK
-# sleep 3
+# sgdisk --zap-all             $DISK
+# sgdisk -n2:1M:+256M -t2:EF00 $DISK # efi
+# sgdisk -n3:0:+1791M -t3:8300 $DISK # boot
+# sgdisk -n4:0:+12G   -t4:8300 $DISK # unused
+# sgdisk -n5:0:+16G   -t5:8200 $DISK # swap
+# sgdisk -n6:0:0      -t6:BF00 $DISK # system
+# sleep 1
 
 # creating main pool
 zpool create -f   \
@@ -38,7 +39,7 @@ zpool create -f   \
   -O xattr=sa \
   -O mountpoint=/ \
   -R /mnt     \
-  main $DISK-part5
+  main $DISK-part6
 
 # creating datasets
 zfs create -o canmount=off -o mountpoint=none main/ROOT
