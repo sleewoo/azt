@@ -18,10 +18,10 @@ modprobe zfs
 
 # sgdisk --zap-all             $DISK
 # sgdisk -n2:1M:+256M -t2:EF00 $DISK # efi
-# sgdisk -n3:0:+1791M -t3:8300 $DISK # boot
-# sgdisk -n4:0:+12G   -t4:8300 $DISK # unused
-# sgdisk -n5:0:+16G   -t5:8200 $DISK # swap
-# sgdisk -n6:0:0      -t6:BF00 $DISK # system
+# sgdisk -n5:0:+1791M -t5:8300 $DISK # boot
+# sgdisk -n6:0:+12G   -t6:8300 $DISK # unused
+# sgdisk -n7:0:+16G   -t7:8200 $DISK # swap
+# sgdisk -n8:0:0      -t8:BF00 $DISK # system
 # sleep 1
 
 # creating main pool
@@ -39,7 +39,7 @@ zpool create -f   \
   -O xattr=sa \
   -O mountpoint=/ \
   -R /mnt     \
-  main $DISK-part6
+  main $DISK-part8
 
 # creating datasets
 zfs create -o canmount=off -o mountpoint=none main/ROOT
@@ -71,14 +71,14 @@ zfs mount main/ROOT/default
 zfs mount -a
 
 # preparing boot partition
-mkfs.ext4 /dev/sda3
+mkfs.ext4 /dev/disk/by-id/$DISK-part5
 mkdir -p /mnt/boot
-mount /dev/sda3 /mnt/boot
+mount /dev/disk/by-id/$DISK-part5 /mnt/boot
 
 # preparing EFI partition
-mkdosfs -F 32 -s 1 -n EFI /dev/sda2
+mkdosfs -F 32 -s 1 -n EFI /dev/disk/by-id/$DISK-part2
 mkdir -p /mnt/efi
-mount /dev/sda2 /mnt/efi
+mount /dev/disk/by-id/$DISK-part2 /mnt/efi
 
 cp -av /.azt /mnt
 
