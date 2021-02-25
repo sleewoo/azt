@@ -46,7 +46,7 @@ mkswap /dev/sda7
 
 cat >> /etc/fstab <<EOF
 # uncomment line below to enable swap
-# UUID=`ls -l /dev/disk/by-uuid | grep /sda7 | cut -d' ' -f8` none swap defaults,discard 0 0
+# UUID=`ls -l /dev/disk/by-uuid | grep /sda7 | cut -d' ' -f9` none swap defaults,discard 0 0
 EOF
 
 # uncomment to fix uncontrolled wake on MBP
