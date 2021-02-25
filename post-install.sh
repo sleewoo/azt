@@ -52,7 +52,7 @@ EOF
 # uncomment to fix uncontrolled wake on MBP
 #cat >> /etc/tmpfiles.d/100-fix-wake.conf <<EOF
 ##    Path                  Mode UID  GID  Age Argument
-#w    /proc/acpi/wakeup     -    -    -    -   LID0
+#w    /proc/acpi/wakeup     -    -    -    -   XHC1LID0
 #EOF
 
 systemctl enable zfs-import-cache
