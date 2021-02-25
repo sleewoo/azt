@@ -49,6 +49,12 @@ cat >> /etc/fstab <<EOF
 # UUID=`ls -l /dev/disk/by-uuid | grep /sda7 | cut -d' ' -f8` none swap defaults,discard 0 0
 EOF
 
+# uncomment to fix uncontrolled wake on MBP
+#cat >> /etc/tmpfiles.d/100-fix-wake.conf <<EOF
+##    Path                  Mode UID  GID  Age Argument
+#w    /proc/acpi/wakeup     -    -    -    -   LID0
+#EOF
+
 systemctl enable zfs-import-cache
 systemctl enable zfs-import.target
 systemctl enable zfs-mount
