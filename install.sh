@@ -16,6 +16,7 @@ pacstrap /mnt \
   bash-completion \
   sudo \
   which \
+  terminus-font \
 ;
 
 echo `hostid` > /mnt/etc/hostid
