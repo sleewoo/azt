@@ -32,7 +32,7 @@ mkinitcpio -P
 
 mkdir -p /boot/grub
 
-sed 's|GRUB_CMDLINE_LINUX=""|GRUB_CMDLINE_LINUX="root=ZFS=main/ROOT/default"|' -i /etc/default/grub
+sed 's|^GRUB_CMDLINE_LINUX|#GRUB_CMDLINE_LINUX|;1s|^|\nGRUB_CMDLINE_LINUX_DEFAULT="loglevel=3"\nGRUB_CMDLINE_LINUX="root=ZFS=main/ROOT/default"\n|' -i /etc/default/grub
 
 ZPOOL_VDEV_NAME_PATH=1 grub-mkconfig -o /boot/grub/grub.cfg
 
