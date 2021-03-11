@@ -27,7 +27,7 @@ modprobe zfs
 zpool set cachefile=/etc/zfs/zpool.cache main
 
 # add zfs to hooks and generate initramfs
-sed 's/HOOKS=(base udev autodetect modconf block filesystems keyboard fsck)/HOOKS=(base udev autodetect modconf block keyboard consolefont zfs filesystems)/' -i /etc/mkinitcpio.conf
+sed 's/^HOOKS/#HOOKS/;1s/^/\nHOOKS=(base udev autodetect modconf block keyboard consolefont zfs filesystems)\n\n/' -i /etc/mkinitcpio.conf
 mkinitcpio -P
 
 mkdir -p /boot/grub
