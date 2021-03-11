@@ -27,7 +27,7 @@ modprobe zfs
 zpool set cachefile=/etc/zfs/zpool.cache main
 
 # add zfs to hooks and generate initramfs
-sed 's/HOOKS=(base udev autodetect modconf block filesystems keyboard fsck)/HOOKS=(base udev autodetect modconf block keyboard zfs filesystems)/' -i /etc/mkinitcpio.conf
+sed 's/HOOKS=(base udev autodetect modconf block filesystems keyboard fsck)/HOOKS=(base udev autodetect modconf block keyboard consolefont zfs filesystems)/' -i /etc/mkinitcpio.conf
 mkinitcpio -P
 
 mkdir -p /boot/grub
@@ -47,6 +47,17 @@ mkswap /dev/sda7
 cat >> /etc/fstab <<EOF
 # uncomment line below to enable swap
 # UUID=`ls -l /dev/disk/by-uuid | grep /sda7 | cut -d' ' -f9` none swap defaults,discard 0 0
+EOF
+
+! sed '1s/^/en_US.UTF-8 UTF-8\n/' -i /etc/locale.gen
+! locale-gen
+
+cat > /etc/locale.conf <<EOF
+LANG=en_US.UTF-8
+EOF
+
+cat > /etc/vconsole.conf <<EOF
+FONT=ter-c28b
 EOF
 
 # uncomment to fix uncontrolled wake on MBP
